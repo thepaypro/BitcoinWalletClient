@@ -1,11 +1,27 @@
-# bitcore-wallet
+# PayPro Bitcore wallet CLI implementation
+
+Node based project with a cli integration for the bitcore wallet client service.
+
+## Requirements
+
+* [Docker engine](https://www.docker.com/)
+* [Docker compose](https://docs.docker.com/compose/)
+
+## Usage
+
+Simply run `docker-compose up` in the root directory of the project to install the required dependencies.
+Once it has finished you can run any BWS CLI command through the docker API via `docker-compose exec node -c "[CLI command]"`.
+
+For more info about the CLI commands available check the quick guide section and/or the Bitcore wallet documentation.
+
+## bitcore-wallet
 
 [![NPM Package](https://img.shields.io/npm/v/bitcore-wallet.svg?style=flat-square)](https://www.npmjs.org/package/bitcore-wallet)
 
-A simple Command Line Interface Wallet using [Bitcore Wallet Service] (https://github.com/bitpay/bitcore-wallet-service) and its *official* client lib, bitcore-wallet-client] (https://github.com/bitpay/bitcore-wallet-client)
+A simple Command Line Interface Wallet using [Bitcore Wallet Service](https://github.com/bitpay/bitcore-wallet-service) and its *official* client lib, [bitcore-wallet-client](https://github.com/bitpay/bitcore-wallet-client)
 
 
-# Quick Guide
+## Quick Guide
 
 ``` shell
 # Use -h or BWS_HOST to setup the BWS URL (defaults to localhost:3001)
@@ -74,7 +90,7 @@ wallet --help
   ```
   
   
-# Password protection 
+## Password protection 
 
 It is possible (and recommeded) to encrypt the wallet's credentials (.dat file). this is done 
 be adding the `-p` parameter to `join` or `create` or `genkey`. The password will be asked 
@@ -84,51 +100,5 @@ Password-based key derication function 2 (http://en.wikipedia.org/wiki/PBKDF2) i
 the key to encrypt the data. AES is used to do the actual encryption, using the implementation
 of SJCL (https://bitwiseshiftleft.github.io/sjcl/).
 
-
-# Airgapped Operation 
-
-Air gapped (non connected) devices are supported. This setup can be useful if maximum security is needed, to prevent private keys from being compromised. In this setup, a device is installed without network access, and transactions are signed off-line. Transactions can be pulled from BWS using a `proxy` device, then downloaded to a pendrive to be moved to the air-gapped device, signed there, and then moved back the `proxy` device to be sent back to BWS. Note that Private keys are generated off-line in the airgapped device.
-
-
-``` shell
-
-# On the Air-gapped device
-
-# Generate extended private key (add -t for testnet)
-airgapped$ wallet genkey
-  * Livenet Extended Private Key Created.
-
-airgapped$ wallet export -o toproxy --nosign
-  * Wallet data saved at toproxy without signing capability.
-
-
-# On the proxy machine
-proxy$ wallet import toproxy
-  * Wallet Imported without signing capability.
-proxy$ wallet join <secret>    # Or wallet create 
-proxy$ wallet address
-proxy$ wallet balance
-
-# It is not possible to sign transactions from the proxy device
-proxy$ wallet sign
-  [Error: You do not have the required keys to sign transactions]
-
-# Export pending transaction to be signed offline
-proxy$ wallet txproposals -o txproposals.dat
-
-## Back to air-gapped device
-
-# Sign them
-airgapped$ wallet airsign txproposals.dat -o signatures.dat
-
-# NOTE: To allow the airgapped device to check the transaction proposals being signed, the public keys of the copayers will be imported from the txproposals archive. That information is exported automatically by the proxy machine, and encrypted using copayer's xpriv derivatives.
-
-## Back to proxy machine
-
-# Send signatures to BWS
-proxy$ wallet sign -i signatures.dat
-  Transaction 014255.... signed by you.
-
-```
 
 

@@ -1,7 +1,8 @@
 version: '3'
 services:
   node:
-    image: node
+    image: library/node:8.6
     volumes:
-      - ./bitcore-wallet:/var/www/html/bitcore-wallet
-    command: bash -c "cd /var/www/html/bitcore-wallet && npm install"
+      - ./bitcore-wallet:/var/www/html
+      - ./wallets:/wallets
+    command: bash -c "cd /var/www/html && npm install"
