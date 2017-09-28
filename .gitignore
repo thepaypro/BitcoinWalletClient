@@ -1,2 +1,28 @@
 .idea
-node_modules
+
+# Wallets directory
+wallets
+
+# Logs
+logs
+*.log
+*.sw*
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Compiled binary addons (http://nodejs.org/api/addons.html)
+build/Release
+
+# Dependency directory
+# Commenting this out is preferred by some people, see
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
+bitcore-wallet/node_modules
+
+*.swp
+out/
+db/*
+
+.bit
