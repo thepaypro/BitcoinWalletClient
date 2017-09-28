@@ -3,5 +3,5 @@ services:
   node:
     image: node
     volumes:
-      - .:/var/www/html
-    command: bash -c "cd /var/www/html/bitcore-wallet-client && npm install"
+      - ./bitcore-wallet:/var/www/html/bitcore-wallet
+    command: bash -c "cd /var/www/html/bitcore-wallet && npm install"
