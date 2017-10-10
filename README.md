@@ -1,3 +1,4 @@
+
 # PayPro Bitcore wallet CLI implementation
 
 Node based project with a cli integration for the bitcore wallet client service.
@@ -99,6 +100,3 @@ interactively. Following commands that use the crendetials will require the pass
 Password-based key derication function 2 (http://en.wikipedia.org/wiki/PBKDF2) is used to derive
 the key to encrypt the data. AES is used to do the actual encryption, using the implementation
 of SJCL (https://bitwiseshiftleft.github.io/sjcl/).
-
-
-
