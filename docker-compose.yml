@@ -1,0 +1,8 @@
+version: '3'
+services:
+  node:
+    image: library/node:8.6
+    volumes:
+      - ./bitcore-wallet:/var/www
+      - ./wallets:/wallets
+    command: bash -c "cd /var/www && npm install"
