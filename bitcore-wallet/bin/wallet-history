@@ -36,7 +36,7 @@ utils.getClient(program, { mustExist: true }, function (client) {
         break;
       }
 
-      console.log("\t%s: %s %s %s %s(%s confirmations)", time, direction, tx.action, amount, proposal, confirmations,tx.time);
+      console.log("\t%s: %s %s %s %s ( addressTo: %s ) (%s confirmations)", time, direction, tx.action, amount, proposal, tx.addressTo, confirmations, tx.time);
     });
   });
 });
